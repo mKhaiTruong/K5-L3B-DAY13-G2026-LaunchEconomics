@@ -4,6 +4,7 @@ Không cần khoá API. Điền các chỗ ghi VIẾT Ở ĐÂY (đánh dấu TO
 Bản gốc chưa sửa nằm ở lab13_starter.py.
 """
 import math
+from statistics import NormalDist
 import pandas as pd
 
 # Bảng giá GIẢ ĐỊNH của lab (không phải giá thật của nhà cung cấp nào)
@@ -167,6 +168,97 @@ def so_nhan(duong_dan='../report/team/bang_loi.md'):
     return dict(so_ca=so_ca, trung=trung, ti_le=trung / 20, lech=lech, sai_ten=sai_ten)
 
 
+# ---------- Nhiệm vụ D1 · Cỡ mẫu cho pilot ----------
+ICC = 0.02   # đề cho: mức giống nhau giữa các yêu cầu trong cùng một cụm (nhân viên / depot)
+
+
+def co_mau_hai_ti_le(p1, p2, alpha=0.05, power=0.8):
+    """Tính cỡ mẫu mỗi nhóm để phân biệt hai tỉ lệ p1 và p2.
+
+    Công thức trong docs/du_lieu_va_cong_thuc.md (z chính xác, làm tròn lên):
+    n = (z_{1-α/2}·√(2·p̄·(1-p̄)) + z_{1-β}·√(p1(1-p1) + p2(1-p2)))² / (p2 - p1)²
+
+    Args:
+        p1: Tỉ lệ hiện tại (nhóm đối chứng), ví dụ 0.70.
+        p2: Tỉ lệ mục tiêu (nhóm dùng trợ lý), ví dụ 0.75.
+        alpha: Mức ý nghĩa hai phía.
+        power: Xác suất phát hiện được mức chênh khi nó có thật.
+
+    Returns:
+        Số yêu cầu mỗi nhóm (int), ví dụ 0.70 → 0.75 cho 1.251.
+    """
+    z_a = NormalDist().inv_cdf(1 - alpha / 2)    # 1,95996 với alpha 0,05
+    z_b = NormalDist().inv_cdf(power)            # 0,84162 với power 0,8
+    p_tb = (p1 + p2) / 2
+    tu = (z_a * math.sqrt(2 * p_tb * (1 - p_tb))
+          + z_b * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))) ** 2
+    return math.ceil(tu / (p2 - p1) ** 2)
+
+
+def he_so_thiet_ke(m, icc=ICC):
+    """Tính hệ số thiết kế (design effect) 1 + (m - 1)·ICC.
+
+    Args:
+        m: Số yêu cầu mỗi cụm.
+        icc: Hệ số tương quan trong cụm.
+
+    Returns:
+        Hệ số thiết kế, ví dụ m = 75 → 2,48.
+    """
+    return 1 + (m - 1) * icc
+
+
+def co_mau_hieu_dung(c, m, icc=ICC):
+    """Tính cỡ mẫu hiệu dụng c·m / hệ số thiết kế; luôn nhỏ hơn trần c / ICC.
+
+    Args:
+        c: Số cụm mỗi nhóm.
+        m: Số yêu cầu mỗi cụm.
+        icc: Hệ số tương quan trong cụm.
+
+    Returns:
+        Cỡ mẫu hiệu dụng mỗi nhóm (float).
+    """
+    return c * m / he_so_thiet_ke(m, icc)
+
+
+def m_toi_thieu(n_can, c, icc=ICC):
+    """Tính số yêu cầu mỗi cụm tối thiểu để c cụm đạt cỡ mẫu hiệu dụng n_can.
+
+    Giải c·m / (1 + (m - 1)·icc) ≥ n_can  →  m ≥ n_can·(1 - icc) / (c - n_can·icc).
+
+    Args:
+        n_can: Cỡ mẫu hiệu dụng cần đạt mỗi nhóm.
+        c: Số cụm mỗi nhóm.
+        icc: Hệ số tương quan trong cụm.
+
+    Returns:
+        m nhỏ nhất (int), hoặc None nếu không có nghiệm (trần c / icc nhỏ hơn n_can).
+    """
+    if c <= n_can * icc:
+        return None
+    return math.ceil(n_can * (1 - icc) / (c - n_can * icc))
+
+
+def power_hai_ti_le(p1, p2, n, alpha=0.05):
+    """Tính power khi mỗi nhóm có n mẫu (đảo ngược công thức cỡ mẫu ở trên).
+
+    Args:
+        p1: Tỉ lệ nhóm đối chứng.
+        p2: Tỉ lệ thật của nhóm dùng trợ lý.
+        n: Cỡ mẫu (hiệu dụng) mỗi nhóm.
+        alpha: Mức ý nghĩa hai phía.
+
+    Returns:
+        Xác suất pilot phát hiện được mức chênh p2 - p1, ví dụ n = 859, 0.70 → 0.75 cho ≈ 0,64.
+    """
+    z_a = NormalDist().inv_cdf(1 - alpha / 2)
+    p_tb = (p1 + p2) / 2
+    z_b = ((abs(p2 - p1) * math.sqrt(n) - z_a * math.sqrt(2 * p_tb * (1 - p_tb)))
+           / math.sqrt(p1 * (1 - p1) + p2 * (1 - p2)))
+    return NormalDist().cdf(z_b)
+
+
 if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
@@ -282,6 +374,35 @@ if __name__ == '__main__':
     if kq_nhan['sai_ten']:
         print(f"  nhãn không thuộc 5 loại PAIR: {kq_nhan['sai_ten']} (dùng đúng: {', '.join(LOAI_LOI)})")
 
-    # TODO CP4 · Nhiệm vụ D: cỡ mẫu.
-    #   from statsmodels.stats.proportion import proportion_effectsize
-    #   from statsmodels.stats.power import NormalIndPower
+    # ---------- Nhiệm vụ D1 · Cỡ mẫu (baseline 0,70; +5 điểm; alpha 0,05; power 0,8; ICC 0,02) ----------
+    # Dùng công thức tay của docs (ra 1.251) thay cho statsmodels (proportion_effectsize dùng arcsine, ra 1.250).
+    P0, MDE = 0.70, 0.05
+    SO_NHAN_VIEN = 40
+    n_a = co_mau_hai_ti_le(P0, P0 + MDE)
+    print(f'\nD1 · a) chia theo yêu cầu: {n_a:,} yêu cầu mỗi nhóm')
+
+    m_b = 75
+    de_b = he_so_thiet_ke(m_b)
+    n_b = math.ceil(n_a * de_b)                 # cỡ mẫu cần khi chia cụm = n × hệ số thiết kế
+    nv_b = math.ceil(n_b / m_b)
+    du_nguoi = 'đủ người' if 2 * nv_b <= SO_NHAN_VIEN else 'KHÔNG đủ người'
+    print(f'     b) theo nhân viên, m = {m_b}: hệ số thiết kế {de_b:.2f} → {n_b:,} yêu cầu mỗi nhóm '
+          f'→ {nv_b} nhân viên mỗi nhóm, tổng {2 * nv_b} so với {SO_NHAN_VIEN} người: {du_nguoi}')
+
+    for cau, c, don_vi in [('c', 20, 'nhân viên'), ('d', 6, 'depot')]:
+        tran = c / ICC                           # cỡ mẫu hiệu dụng tối đa, kể cả khi m rất lớn
+        dat = 'đạt' if tran >= n_a else 'KHÔNG đạt'
+        print(f'     {cau}) {c} {don_vi} mỗi nhóm: cỡ mẫu hiệu dụng tối đa {c} / {ICC} = {tran:,.0f} '
+              f'so với cần {n_a:,} → {dat}')
+
+    n_e = co_mau_hai_ti_le(P0, P0 + 0.06)       # mức chênh 6 điểm
+    m_e = m_toi_thieu(n_e, 20)
+    print(f'     e) mức chênh 6 điểm ({n_e:,} mỗi nhóm), 20 nhân viên mỗi nhóm: m ≥ {m_e} yêu cầu mỗi người '
+          f'(hệ số thiết kế {he_so_thiet_ke(m_e):.2f}, hiệu dụng {co_mau_hieu_dung(20, m_e):,.0f})')
+    pw = power_hai_ti_le(P0, P0 + MDE, n_e)
+    print(f'     Con số bất lợi: chọn mức chênh 6 điểm mà tác động thật chỉ 5 điểm thì power còn {pw:.2f}')
+
+    # ---------- Nhiệm vụ D3 · Tỉ lệ mở lại hiện tại, trước khi đặt luật an toàn ----------
+    for nhan, bang in [('cả mẫu', reqs), ('noi_dia + hang_nang', pham_vi)]:
+        so_mo_lai = int(bang['mo_lai_trong_7_ngay'].sum())
+        print(f'mo_lai_trong_7_ngay {nhan:20s}: {so_mo_lai}/{len(bang):,} = {so_mo_lai / len(bang):.2%}')

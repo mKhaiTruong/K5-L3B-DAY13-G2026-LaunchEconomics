@@ -74,15 +74,18 @@ Gốc (A2): 4.472 đ (simulated). Tự kiểm tra: mỗi kịch bản "giảm m�
 
 ## B3 · Giới hạn chạy lại có thật sự rẻ hơn
 
+Chi phí cả hệ thống = tổng chi phí trợ lý + 12.000 đ × số yêu cầu không thành công (nhân viên làm thay). Tất cả là [simulated].
+
 | Giới hạn | Tổng chi phí trợ lý | Số yêu cầu không thành công | Chi phí cả hệ thống | Chi phí mỗi việc thành công |
 | --- | ---: | ---: | ---: | ---: |
-| 1 lần | ... | ... | ... | ... |
-| 2 lần | ... | ... | ... | ... |
-| 3 lần | ... | ... | ... | ... |
+| 1 lần | 3.621.781 đ | 319 | 7.449.781 đ | 4.111 đ (thấp nhất) |
+| 2 lần | 4.093.220 đ | 234 | **6.901.220 đ (rẻ nhất)** | 4.237 đ |
+| 3 lần | 4.373.585 đ | 222 | 7.037.585 đ | 4.472 đ |
 
-- Giới hạn nào rẻ nhất cho công ty? Có trùng với giới hạn cho chi phí mỗi việc thành công thấp nhất không? ...
+- Giới hạn **2 lần rẻ nhất cho công ty** (6.901.220 đ), nhưng giới hạn cho chi phí mỗi việc thành công thấp nhất là **1 lần** (4.111 đ): không trùng.
+- Tối ưu riêng chi phí mỗi việc thành công sẽ đẩy thêm 85 việc (319 − 234) sang nhân viên.
 
 ## B4 · Nếu phải xem lại tất cả
 
-- Chi phí mỗi việc thành công khi xem lại 100% (`noi_dia` + `hang_nang`), so với 12.000 đ: ...
-- Kết quả này nói gì về thứ pilot cần học được? ...
+- Xem lại 100% (`noi_dia` + `hang_nang`) cho **11.743 đ = 0,98×** của 12.000 đ nếu làm lại 9 phút, và **12.415 đ = 1,03×** nếu làm lại 15,3 phút [simulated]. Hoà vốn khi mỗi lần xem lại ≤ 5,1 phút (hoặc ≤ 4,8 phút).
+- Pilot cần học tỉ lệ xem lại có thể giảm an toàn xuống mức nào, và một lần xem lại có ngắn hơn 5 phút được không, vì tiền xem lại chiếm khoảng 90% chi phí khi xem 100%.

@@ -40,12 +40,13 @@ Hai ca không trùng là 11 và 20; các ca còn lại là quy tắc cho các ca
 
 - **Ca 11 (Phong: Ngầm · Khánh: Giới hạn hệ thống):** gắn Giới hạn hệ thống vì trợ lý không thể xử lý tin nhắn thoại và đã nói rõ với khách; Ngầm chỉ dùng khi không ai biết.
 - **Ca 20 (Phong: Ngầm · Khánh: Hệ thống):** gắn Hệ thống vì hoàn trùng là vi phạm thiết kế (thiếu khoá chống trùng) và lộ ra qua hai lệnh hoàn; Ngầm chỉ dùng khi lỗi không có tín hiệu nào cho tới khi kiểm tra mẫu.
-- **Ca 6, 9 là Do người dùng, không phải Hệ thống:** gốc lỗi là khách chọn sai mục / nhập sai mã; việc trợ lý không gợi ý là việc cần cải thiện, nằm ở cột khắc phục.
-- **Ca 13 là Giới hạn hệ thống:** ngoài phạm vi thì là giới hạn, kể cả khi trợ lý xử lý giới hạn đó kém.
-- **Ca 8, 15 là Hệ thống, không phải Ngầm:** sai đã lộ ra (trích dẫn nhìn thấy được, nhân viên bắt được). Ngầm chỉ dùng khi không ai nhận ra cho tới khi kiểm tra.
-- **Ca 18 là Ngữ cảnh:** số tiền đúng chính sách, chỉ giả định "khách hiểu cách tính" không khớp hoàn cảnh.
-- **Ca 12 là Ngầm:** kết quả vẫn đúng nhưng chi phí gấp 3 lần suốt 3 tuần mà không ai thấy; "sai" có thể là sai về chi phí.
-- **Ca 2 vs 17:** cả hai tính sai tiền, nhưng ca 2 có khách mở lại (đã lộ) → Hệ thống; ca 17 không ai mở lại trong 9 ngày → Ngầm.
+- **Ca 13 là Giới hạn hệ thống, không phải Hệ thống:** vì hoàn phí bảo hiểm hàng hoá thuộc công ty đối tác, nằm ngoài phạm vi trợ lý có thể xử lý; Hệ thống chỉ dùng khi tác vụ nằm trong khả năng của trợ lý nhưng trợ lý làm sai so với thiết kế hoặc chính sách và lỗi đã lộ ra.
+- **Ca 12 là Ngầm, không phải Hệ thống:** vì lỗi tool của depot D05 trả thiếu trường làm trợ lý phải gọi tool nhiều lần, kết quả vẫn đúng nhưng tốn gấp 3 tiền token suốt 3 tuần mà không ai biết; Hệ thống chỉ dùng khi sai sót so với thiết kế hoặc chính sách đã có người nhìn thấy (như khách mở lại, nhân viên bắt được hoặc lỗi hiện ra).
+- **Ca 18 là Ngữ cảnh, không phải Hệ thống:** vì trợ lý đã tính đúng mức hoàn 50% (15.000 đ) theo chính sách và thiết kế, chỉ do tin nhắn thiếu giải thích cách tính khiến khách hiểu nhầm là hoàn thiếu; Hệ thống chỉ dùng khi bản thân trợ lý tính toán hoặc xử lý sai so với chính sách hoặc thiết kế.
+- **Ca 6 là Do người dùng, không phải Hệ thống:** vì khách đã chọn nhầm mục "Hoàn phí giao trễ" ngay từ đầu trong khi vấn đề thực tế là hàng bị vỡ; Hệ thống chỉ dùng khi người dùng thao tác đúng nhưng trợ lý xử lý sai so với thiết kế hoặc chính sách.
+- **Ca 9 là Do người dùng, không phải Hệ thống:** vì khách nhập sai loại mã (dùng mã đơn sàn thương mại điện tử thay vì mã vận đơn); Hệ thống chỉ dùng khi người dùng cung cấp đúng đầu vào theo yêu cầu nhưng trợ lý xử lý sai thiết kế hoặc chính sách.
+- **Ca 8 là Hệ thống, không phải Ngầm:** vì trợ lý tự bịa căn cứ "Điều 7.2" không tồn tại trong chính sách hiện hành dù số tiền hoàn vẫn đúng, và lỗi này hiện trực tiếp ra nội dung tin nhắn; Ngầm chỉ dùng khi sai sót âm thầm diễn ra suốt thời gian dài mà không ai phát hiện cho tới khi kiểm tra.
+- **Ca 15 là Hệ thống, không phải Ngầm:** vì trợ lý tính mức hoàn 100% thay vì 50% theo chính sách và đã bị nhân viên xem lại bắt được; Ngầm chỉ dùng khi lỗi không bị ai phát hiện trong thời gian dài và chỉ lộ ra khi kiểm tra định kỳ.
 
 ## Bảng khắc phục cho 5 ca, mỗi loại một ca
 
@@ -53,8 +54,10 @@ Cách phát hiện phải đo được (event, ngưỡng, tần suất). Ngườ
 
 | Ca | Loại lỗi | Phát hiện bằng gì | Khắc phục thế nào | Ai phụ trách |
 | --: | --- | --- | --- | --- |
-| 9 | Do người dùng | Event `input_validation_failed`; cảnh báo khi quá 2% số yêu cầu/ngày | Nhận diện mã sàn TMĐT và tra sang mã vận đơn; không tra được thì hướng dẫn kèm ảnh | PM trợ lý hoàn phí |
-| 7 | Hệ thống | Đối soát mỗi giờ: tin nhắn "đã hoàn" mà không có bản ghi `refund_ledger_write` kết quả ok cùng `trace_id`; ngưỡng 0 ca | Chỉ báo "đã hoàn" khi sổ cái trả ok; lỗi 503 sau 3 lần thì báo "đang xử lý" và chuyển nhân viên | Kỹ sư trưởng agent |
-| 18 | Ngữ cảnh | Tỉ lệ `ticket_reopened` với lý do số tiền mà kiểm tra thấy đúng, theo tuần; ngưỡng > 1% yêu cầu/tuần | Mẫu tin nhắn luôn ghi cách tính: 30.000 đ × 50% = 15.000 đ | Trưởng nhóm CSKH |
-| 4 | Giới hạn hệ thống | Event `handoff_to_staff` với `reason = thieu_du_lieu`, theo loại yêu cầu, báo cáo hằng tuần | Giữ cách chuyển kèm tóm tắt; đưa `quoc_te` ra khỏi pilot (thành công 27,3% [simulated]) | PM trợ lý hoàn phí |
-| 17 | Ngầm | Kiểm tra mẫu 100 đơn/tuần (`audit_sample_checked`) so với bảng giá hiện hành; ngưỡng 1% đơn lệch | Xoá bộ nhớ đệm khi có bảng giá mới, ghi phiên bản bảng giá vào trace | Kế toán trưởng |
+| 1 | Do người dùng | Event `bank_account_validation_failed`; cảnh báo khi quá 3% số yêu cầu/ngày | Kiểm tra độ dài số tài khoản theo từng ngân hàng ngay lúc nhập; hiển thị tên chủ tài khoản để khách xác nhận | PM trợ lý hoàn phí |
+| 20 | Hệ thống | Đối soát mỗi giờ: nhiều bản ghi `refund_ledger_write` có cùng `idempotency_key` hoặc cùng `order_id`; ngưỡng 0 ca | Gắn khoá chống trùng (`idempotency_key` theo `order_id`) vào lệnh hoàn; chặn lệnh hoàn thứ hai nếu đã có cùng khoá | Kỹ sư trưởng agent |
+| 3 | Ngữ cảnh | Tỉ lệ `ticket_reopened` báo "chưa nhận tiền" dù `refund_ledger_write` ghi hoàn về ví đã ok, theo tuần; ngưỡng > 2% yêu cầu/tuần | Sửa mẫu tin nhắn ghi rõ "Đã hoàn về ví LogiX (không chuyển thẳng về ngân hàng)" kèm hướng dẫn rút tiền | Trưởng nhóm CSKH |
+| 11 | Giới hạn hệ thống | Event `unsupported_input_type` với `media_type = audio`, báo cáo hằng tuần; ngưỡng > 5% lượt chat/tuần | Ẩn nút ghi âm trên khung chat trợ lý hoàn phí và hiện gợi ý nhập chữ | PM trợ lý hoàn phí |
+| 5 | Ngầm | Kiểm tra mẫu 100 đơn có mã giảm giá mỗi tuần (`audit_sample_checked`) so với tiền khách thực trả; ngưỡng 1% đơn hoàn thừa | Tính tiền hoàn theo số tiền khách thực trả (`actual_paid_amount`) thay vì giá gốc; chặn tự động nếu tiền hoàn lớn hơn tiền khách trả | Kế toán trưởng |
+
+Ghi chú: các ngưỡng (3%, 2%, 5%, 1%) là đề xuất của nhóm, điều chỉnh sau tuần 1 của pilot. Hai event mới `bank_account_validation_failed` và `unsupported_input_type` cần thêm vào danh sách event trong `chi_so.md`.

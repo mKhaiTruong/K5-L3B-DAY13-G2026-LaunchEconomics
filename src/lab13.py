@@ -402,6 +402,16 @@ if __name__ == '__main__':
     pw = power_hai_ti_le(P0, P0 + MDE, n_e)
     print(f'     Con số bất lợi: chọn mức chênh 6 điểm mà tác động thật chỉ 5 điểm thì power còn {pw:.2f}')
 
+    # ---------- Nhiệm vụ E1 · Tính thử ba chỉ số (chỉ số trong đợt chạy thử, chưa có đối chứng) ----------
+    print('\nE1 · chỉ số | chính (đóng 24h, không mở lại 7 ngày) | dùng (bỏ qua gợi ý) | an toàn (mở lại 7 ngày)')
+    for nhan, bang in [('cả mẫu', reqs), ('noi_dia + hang_nang', pham_vi)]:
+        chinh = int(((bang['dong_trong_24h'] == 1) & (bang['mo_lai_trong_7_ngay'] == 0)).sum())
+        xem = bang[bang['duoc_xem_lai'] == 1]
+        bo_qua = int(xem['quyet_dinh_xem_lai'].isin(['sua', 'bo']).sum())
+        mo_lai = int((bang['mo_lai_trong_7_ngay'] == 1).sum())
+        print(f'{nhan:20s} {chinh}/{len(bang)} = {chinh / len(bang):.2%} | '
+              f'{bo_qua}/{len(xem)} = {bo_qua / len(xem):.2%} | {mo_lai}/{len(bang)} = {mo_lai / len(bang):.2%}')
+
     # ---------- Nhiệm vụ D3 · Tỉ lệ mở lại hiện tại, trước khi đặt luật an toàn ----------
     for nhan, bang in [('cả mẫu', reqs), ('noi_dia + hang_nang', pham_vi)]:
         so_mo_lai = int(bang['mo_lai_trong_7_ngay'].sum())

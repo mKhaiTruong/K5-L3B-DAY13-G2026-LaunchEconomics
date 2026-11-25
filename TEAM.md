@@ -5,7 +5,7 @@
 - Tên nhóm: G2026
 - Lớp: L3B
 - Repo nhóm: `K5-L3B-DAY13-G2026-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt: https://github.com/mKhaiTruong/K5-L3B-DAY13-G2026-LaunchEconomics · nhánh `main` · commit chốt: (điền khi nộp)
+- URL repo, nhánh nộp, commit chốt: https://github.com/mKhaiTruong/K5-L3B-DAY13-G2026-LaunchEconomics · nhánh `main` · commit chốt: `c58c15e`
 
 ## Thành viên
 

@@ -27,7 +27,7 @@ Trả lời bốn câu cho trợ lý hoàn phí của LogiX-VN: có đáng chạ
 - Chỉ số trong đợt chạy thử (chưa có đối chứng), phạm vi pilot: chính 92,26% · bỏ qua gợi ý 21,09% · mở lại 7 ngày 3,97%.
 - Pilot: 859 yêu cầu/nhóm, hệ số thiết kế 6,96, 20 cụm mỗi nhóm; chỉ đo được mức chênh 6 điểm, power khoảng 0,64 nếu tác động thật chỉ 5 điểm.
 - **Đề xuất của hồ sơ: Go có điều kiện** cho pilot `noi_dia` + `hang_nang`, với 4 điều kiện có người phụ trách và ngày kiểm tra.
-- Duyệt chéo: nhóm chấm nhóm Pilot (`report/team/phieu_cham.md`). Kết quả hội đồng chấm hồ sơ của nhóm mình: (điền khi nhận được).
+- Duyệt chéo: nhóm chấm nhóm Pilot (`report/team/phieu_cham.md`). Kết quả hội đồng chấm hồ sơ của nhóm mình: **30/30**.
 
 ## 5. Khó khăn và cách xử lý
 

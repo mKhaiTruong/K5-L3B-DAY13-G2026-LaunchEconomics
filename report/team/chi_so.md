@@ -48,5 +48,5 @@ Viết "chỉ số trong đợt chạy thử là …", không viết "trợ lý 
 
 | Rủi ro | Tác động đã tính | Dấu hiệu theo dõi | Hành động | Người phụ trách |
 | --- | --- | --- | --- | --- |
-| ... | ... | ... | ... | ... |
-| ... | ... | ... | ... | ... |
+| Số ca làm lại tăng gấp đôi | Chi phí mỗi việc thành công +51,8%, lên 6.787 đ [simulated] (B1), vượt ngưỡng dừng chi phí 6.000 đ trong `pilot_plan.yaml` | Tỉ lệ yêu cầu phải làm lại theo tuần trong phạm vi > 7% (đợt chạy thử: 4,9% = 48/982), đếm bằng `staff_rework_completed` | Thu hẹp về `noi_dia` và rà 20 trace làm lại gần nhất trong 3 ngày | PM trợ lý hoàn phí |
+| Phải xem lại 100% kéo dài | Xem lại tất cả: 11.743 đ = 0,98× của 12.000 đ, hoặc 12.415 đ = 1,03× nếu làm lại 15,3 phút [simulated] (B4); riêng xem lại gấp đôi đã +40,7% (B1) | Phút xem lại đo thật trung bình > 5,1 phút/yêu cầu, mức hoà vốn ở B4 (đợt chạy thử: 5,0 phút [simulated]), lấy từ `staff_review_decision`.phut_xem_lai | Giảm tỉ lệ xem lại theo bậc khi tỉ lệ sửa + bỏ < 15% (đợt chạy thử: 21,1% = 27/128 trong phạm vi) | Trưởng nhóm CSKH |

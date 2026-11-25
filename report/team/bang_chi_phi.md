@@ -54,20 +54,23 @@ Số tính bằng `src/lab13.py`. Mọi con số tính từ cột `_simulated` g
 
 | Kịch bản | Cách tính | Chi phí mỗi việc thành công | Thay đổi (%) |
 | --- | --- | ---: | ---: |
-| Giá token gấp đôi | 52 đ và 260 đ cho 1.000 token; giá tool giữ nguyên | ... | ... |
-| Giá token giảm một nửa | 13 đ và 65 đ | ... | ... |
-| Tỉ lệ xem lại gấp đôi | Tiền xem lại × 2 | ... | ... |
-| Tỉ lệ xem lại giảm một nửa | Tiền xem lại ÷ 2 | ... | ... |
-| Số ca làm lại gấp đôi | Tiền làm lại × 2 | ... | ... |
-| Số ca làm lại giảm một nửa | Tiền làm lại ÷ 2 | ... | ... |
-| Lương nhân viên tăng 25% | 2.500 đ mỗi phút | ... | ... |
-| Chỉ cho chạy tối đa 2 lần | Bỏ lần chạy có attempt > 2; yêu cầu có so_lan_chay > 2 coi là chuyen_nhan_vien | ... | ... |
-| Chỉ cho chạy 1 lần | Như trên với giới hạn 1 | ... | ... |
+| Giá token gấp đôi | 52 đ và 260 đ cho 1.000 token; giá tool giữ nguyên | 4.723 (simulated) | +5,6 |
+| Giá token giảm một nửa | 13 đ và 65 đ | 4.346 (simulated) | −2,8 |
+| Tỉ lệ xem lại gấp đôi | Tiền xem lại × 2 | 6.292 (simulated) | +40,7 |
+| Tỉ lệ xem lại giảm một nửa | Tiền xem lại ÷ 2 | 3.562 (simulated) | −20,3 |
+| Số ca làm lại gấp đôi | Tiền làm lại × 2 | 6.787 (simulated) | +51,8 |
+| Số ca làm lại giảm một nửa | Tiền làm lại ÷ 2 | 3.315 (simulated) | −25,9 |
+| Lương nhân viên tăng 25% | 2.500 đ mỗi phút | 5.506 (simulated) | +23,1 |
+| Chỉ cho chạy tối đa 2 lần | Bỏ lần chạy có attempt > 2; yêu cầu có so_lan_chay > 2 coi là chuyen_nhan_vien | 4.237 (simulated) | −5,2 |
+| Chỉ cho chạy 1 lần | Như trên với giới hạn 1 | 4.111 (simulated) | −8,1 |
+
+Gốc (A2): 4.472 đ (simulated). Tự kiểm tra: mỗi kịch bản "giảm một nửa" giảm đúng ½ mức tăng của "gấp đôi" (token 5,6 → 2,8 · xem lại 40,7 → 20,3 · làm lại 51,8 → 25,9). Hai dòng giới hạn chạy không theo luật này vì đổi cả mẫu số (978 → 966 → 881 việc thành công).
 
 ## B2 · Đổi một cặp và xếp hạng
 
-- Giá token gấp đôi cùng lúc tỉ lệ xem lại gấp đôi: ...
-- Xếp hạng ba yếu tố ảnh hưởng mạnh nhất: 1. ... · 2. ... · 3. ...
+- Giá token gấp đôi cùng lúc tỉ lệ xem lại gấp đôi: **6.543 đ (+46,3%)** [simulated], đúng bằng tổng hai tác động riêng (+5,6% + 40,7%): mô hình cộng tuyến tính và mẫu số 978 không đổi.
+- Xếp hạng ba yếu tố ảnh hưởng mạnh nhất: 1. **Số ca làm lại** (+51,8%) · 2. **Tỉ lệ xem lại** (+40,7%) · 3. **Lương nhân viên** (+23,1%) [simulated].
+  Giá token gấp đôi chỉ +5,6% vì token chiếm 5,6% tổng chi phí; pilot phải theo dõi tỉ lệ làm lại và tỉ lệ xem lại, không phải giá token.
 
 ## B3 · Giới hạn chạy lại có thật sự rẻ hơn
 

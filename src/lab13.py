@@ -123,6 +123,43 @@ def mo_hinh(runs, reqs, gia_vao=26, gia_ra=130, gia_tool=15, luong_phut=2000,
     )
 
 
+# ---------- Nhiệm vụ C · So hai bộ nhãn độc lập ----------
+LOAI_LOI = ['Do người dùng', 'Hệ thống', 'Ngữ cảnh', 'Giới hạn hệ thống', 'Ngầm']
+
+
+def so_nhan(duong_dan='../report/team/bang_loi.md'):
+    """Đọc hai cột nhãn trong bảng lỗi rồi tính tỉ lệ đồng thuận.
+
+    Chỉ đọc file, không ghi gì: hai người gắn nhãn tự điền cột của mình.
+    Nhãn so sánh không phân biệt hoa/thường và khoảng trắng thừa.
+
+    Args:
+        duong_dan: Đường dẫn tới report/team/bang_loi.md (tính từ thư mục src/).
+
+    Returns:
+        Dict gồm: so_ca (số ca đã có đủ 2 nhãn), trung (số ca trùng), ti_le (trung / 20),
+        lech (list số ca không trùng), sai_ten (list (ca, nhãn) không thuộc 5 loại PAIR).
+        Ví dụ: {'so_ca': 20, 'trung': 17, 'ti_le': 0.85, 'lech': [4, 9, 15], 'sai_ten': []}.
+    """
+    hop_le = {loai.lower() for loai in LOAI_LOI}
+    trung, lech, sai_ten, so_ca = 0, [], [], 0
+    with open(duong_dan, encoding='utf-8') as f:
+        for dong in f:
+            o = [x.strip() for x in dong.strip().strip('|').split('|')]
+            if len(o) != 5 or not o[0].isdigit():
+                continue   # chỉ lấy dòng của bảng "Hai bộ nhãn độc lập"
+            ca, n1, n2 = int(o[0]), o[1].lower(), o[2].lower()
+            if '...' in (n1, n2) or not n1 or not n2:
+                continue   # ca chưa gắn đủ hai nhãn
+            so_ca += 1
+            sai_ten += [(ca, n) for n in (o[1], o[2]) if n.lower() not in hop_le]
+            if n1 == n2:
+                trung += 1
+            else:
+                lech.append(ca)
+    return dict(so_ca=so_ca, trung=trung, ti_le=trung / 20, lech=lech, sai_ten=sai_ten)
+
+
 if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
@@ -227,6 +264,17 @@ if __name__ == '__main__':
         phut_hoa_von = (BASELINE * tc_pv - tien_ai - tien_lam) / (co_ok * LUONG_PHUT)
         print(f'làm lại {nhan:28s} tổng {tong_b4:>12,.0f} đ → {cps_b4:,.0f} đ = {cps_b4 / BASELINE:.2f}× '
               f'| hoà vốn khi xem lại ≤ {phut_hoa_von:.1f} phút [simulated]')
+    # ---------- Nhiệm vụ C · Tỉ lệ đồng thuận ----------
+    kq_nhan = so_nhan()
+    if kq_nhan['so_ca'] < 20:
+        print(f"\nC · mới có {kq_nhan['so_ca']}/20 ca đủ hai nhãn, chưa tính đồng thuận")
+    else:
+        dat = 'ĐẠT' if kq_nhan['trung'] >= 16 else 'CHƯA ĐẠT, viết lại định nghĩa trước khi đi tiếp'
+        print(f"\nC · đồng thuận {kq_nhan['trung']}/20 = {kq_nhan['ti_le']:.0%} ({dat}); "
+              f"ca lệch: {kq_nhan['lech'] or 'không có'}")
+    if kq_nhan['sai_ten']:
+        print(f"  nhãn không thuộc 5 loại PAIR: {kq_nhan['sai_ten']} (dùng đúng: {', '.join(LOAI_LOI)})")
+
     # TODO CP4 · Nhiệm vụ D: cỡ mẫu.
     #   from statsmodels.stats.proportion import proportion_effectsize
     #   from statsmodels.stats.power import NormalIndPower

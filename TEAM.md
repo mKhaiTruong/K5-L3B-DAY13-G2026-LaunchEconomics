@@ -96,3 +96,28 @@ Sao chép mục dưới đây cho từng thành viên.
 
 - PR #4 (CP2 · B1, B2, commit 19358c5), PR #9 (CP4 · D1, commit e700f79), PR #12 (CP5 · E2, commit 9ea7596), PR #18 (báo cáo cá nhân); comment kiểm số ở PR #2.
 - Báo cáo cá nhân: `report/team/2A202603781_TrinhTuanPhong.md`.
+
+## TrieuQuocKhanh-2A202603749
+
+### Phần việc phụ trách
+
+- Vai C · người gắn nhãn 2 kiêm giữ hồ sơ.
+- CP1: điền thông tin thành viên trong `TEAM.md`, dựng khung `report/team/ho_so_launch_v0.md`.
+- CP2: viết B3 và B4 trong `report/team/bang_chi_phi.md`.
+- CP3: gắn nhãn độc lập 20 ca (người gắn nhãn 2); viết quy tắc cho các ca dễ lẫn và bảng khắc phục 5 ca trong `report/team/bang_loi.md`.
+- CP4: điền `report/team/pilot_plan.yaml` (phạm vi, luật dừng, rollback, D1, D2).
+- CP5: hoàn thiện `report/team/ho_so_launch_v0.md`, `report/team/group_report.md`; bảo vệ trước hội đồng.
+
+### Đóng góp cụ thể
+
+- B3: giới hạn tối đa 2 lần rẻ nhất cho cả hệ thống (6.901.220 đ [simulated]) nhưng 1 lần có chi phí mỗi việc thấp nhất (4.111 đ), vì đẩy thêm 85 việc sang nhân viên. B4: xem lại 100% cho 0,98× đến 1,03× của 12.000 đ [simulated].
+- Nhãn độc lập: đồng thuận với người gắn nhãn 1 là 18/20 = 90% (lệch ca 11 và 20); bỏ ca 7, 17, 20 (đã được nhắc với AI trước khi gắn xong) còn 16/17 = 94%.
+- Bảng khắc phục 5 ca (1, 20, 3, 11, 5), mỗi ca có event, ngưỡng đề xuất và một vai trò phụ trách.
+- `pilot_plan.yaml`: phạm vi `noi_dia` + `hang_nang`, chia theo nhân viên 20 + 20, 3 luật dừng có lý do (an toàn, chi phí, sử dụng), rollback 15 phút.
+- Hồ sơ launch v0: đề xuất Go có điều kiện cùng 4 điều kiện có người phụ trách và ngày kiểm tra.
+
+### Bằng chứng
+
+- PR #5 (CP1), #6 (CP2 · B3, B4), #7 (CP3), #10 (CP4), #14 (CP5 · hồ sơ launch v0), #15 (báo cáo cá nhân).
+- Báo cáo cá nhân: `report/team/2A202603749_TrieuQuocKhanh.md`.
+

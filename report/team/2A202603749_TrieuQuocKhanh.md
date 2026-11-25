@@ -17,18 +17,18 @@
 
 ## 3. Đóng góp cụ thể
 
-- **CP1:** điền thông tin thành viên và vai theo issue #1 trong `TEAM.md`; sửa trạng thái trong hồ sơ theo nhận xét của nhóm trưởng trên PR #5 (bỏ số của CP4 và CP5 khi nhóm chưa tính, đổi trạng thái về "Chưa", bỏ nhãn `simulated` sai ở chỉ số bỏ qua gợi ý vì chỉ số này không tính từ cột `_simulated`).
+- **CP1:** điền thông tin thành viên và vai theo issue #1 trong `TEAM.md`; sửa hồ sơ theo nhận xét của nhóm trưởng trên PR #5 (bỏ các số của CP4 và CP5 khi nhóm chưa tự tính, đổi trạng thái về "Chưa" cho tới khi có bằng chứng).
 - **CP2:** viết B3: giới hạn tối đa 2 lần rẻ nhất cho công ty (6.901.220 đ [simulated]) nhưng giới hạn 1 lần có chi phí mỗi việc thấp nhất (4.111 đ), vì đẩy thêm 85 việc (319 − 234) sang nhân viên. Viết B4: xem lại 100% cho 11.743 đ = 0,98× và 12.415 đ = 1,03× của 12.000 đ [simulated], hoà vốn khi mỗi lần xem lại ≤ 5,1 hoặc ≤ 4,8 phút.
-- **CP3:** tự gắn nhãn 20 ca trên giấy trước khi so với Phong; đồng thuận 18/20 = 90% (lệch ca 11 và 20). Tự viết lại 5 quy tắc "ca dễ lẫn" (ca 13, 12, 18, 6, 9, 8, 15) và bảng khắc phục 5 ca (1, 20, 3, 11, 5) bằng cách hiểu của mình, sau khi nhóm trưởng nhận xét bản đầu trùng bài mẫu. Khai báo trong `bang_loi.md` rằng trong lúc trao đổi với AI, ca 7, 17, 20 đã được nhắc trước khi gắn xong nhãn; bỏ 3 ca này, đồng thuận là 16/17 = 94%.
+- **CP3:** tự gắn nhãn 20 ca trên giấy trước khi so với Phong; đồng thuận 18/20 = 90% (lệch ca 11 và 20). Tự viết lại các quy tắc "ca dễ lẫn" (ca 13, 12, 18, 6, 9, 8, 15) và bảng khắc phục 5 ca (1, 20, 3, 11, 5) bằng cách hiểu của mình, sau khi nhóm trưởng nhận xét bản đầu trùng bài mẫu. Khai báo trong `bang_loi.md` rằng trong lúc trao đổi với AI, ca 7, 17, 20 đã được nhắc trước khi gắn xong nhãn; bỏ 3 ca này, đồng thuận là 16/17 = 94%.
 - **CP4:** điền `pilot_plan.yaml` bằng số D1 của Phong (859/nhóm, hệ số thiết kế 6,96, 20 cụm); chọn phạm vi `noi_dia` + `hang_nang` dựa trên A3; viết 3 luật dừng có lý do cho từng ngưỡng; chuyển luật sử dụng sang số của phạm vi pilot (21,09% = 27/128).
 - **CP5:** điền mục 4, 5, 6 và đề xuất Go có điều kiện cùng 4 điều kiện có người phụ trách và ngày kiểm tra trong `ho_so_launch_v0.md`.
 
 ## 4. Bằng chứng
 
-- Pull request của mình trên repo nhóm: #5 (CP1), #6 (CP2, B3 và B4), #7 (CP3, bảng lỗi), #10 (CP4, `pilot_plan.yaml`), và PR của CP5 (hồ sơ launch v0).
+- Pull request của mình trên repo nhóm: #5 (CP1), #6 (CP2, B3 và B4), #7 (CP3, bảng lỗi), #10 (CP4, `pilot_plan.yaml`), và #14 (CP5, hồ sơ launch v0).
 - File: `TEAM.md`, `report/team/bang_chi_phi.md` (mục B3, B4), `report/team/bang_loi.md`, `report/team/pilot_plan.yaml`, `report/team/ho_so_launch_v0.md`.
 - Con số mình đối chiếu với output `python lab13.py` của nhóm: 4.472 đ, 16,3 lần, B3 (k = 1, 2, 3), B4 (11.743 đ và 12.415 đ), D1 (1.251, 3.103, 1.000, 300, m ≥ 299), 4,25% và 3,97%.
-- Nhãn độc lập: bộ nhãn viết tay của mình, và ảnh nhãn của Phong, được đưa lên PR #7.
+- Nhãn độc lập: nhãn của mình ghi trong cột "Nhãn người 2" của `bang_loi.md`; ảnh nhãn viết tay của Phong được đưa lên PR #7.
 
 ## 5. Công cụ AI đã dùng
 

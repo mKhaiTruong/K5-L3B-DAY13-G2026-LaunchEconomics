@@ -25,7 +25,7 @@
 #            Không dùng trần 3% vì mức hiện tại đã là 4,25%, pilot sẽ bị dừng ngay tuần đầu.
 #   Chi phí: 6.000 đ cao hơn kịch bản lương +25% (5.506 đ, lý do bên ngoài trợ lý) và thấp hơn kịch bản làm lại gấp đôi (6.787 đ), nên chỉ kích hoạt khi chính trợ lý làm xấu đi.
 #            Giới hạn 2 lần chạy chọn vì B3: 2 lần là mức rẻ nhất cho cả hệ thống (6.901.220 đ).
-#   Sử dụng: 35% là khoảng 1,3 lần mức bỏ qua gợi ý hiện tại 27,12% (48/177); trên mức này khoảng một phần ba gợi ý bị nhân viên bỏ.
+#   Sử dụng: 28% là khoảng 1,3 lần mức bỏ qua gợi ý hiện tại trong phạm vi pilot 21,09% (27/128; cả mẫu 1.200 là 27,12% = 48/177); trên mức này hơn một phần tư số lần xem lại bị nhân viên sửa hoặc bỏ.
 #   Rollback: 15 phút vì khoảng 1.500 yêu cầu mỗi ngày tương đương khoảng 60 yêu cầu mỗi giờ, nên trong 15 phút chỉ khoảng 15 yêu cầu bị ảnh hưởng.
 
 pilot:
@@ -52,7 +52,7 @@ pilot:
   stop_rules:
     - "NẾU tỉ lệ mở lại 7 ngày của nhóm dùng trợ lý cao hơn nhóm đối chứng từ 1,5 điểm trở lên, hoặc vượt trần tuyệt đối 6,5%, TRONG 3 ngày liên tiếp THÌ Giám đốc vận hành tắt trợ lý ngay và cho nhóm đó quay về luồng nhân viên tự làm KHÔNG THÌ không được chuyển sang bước rollout tiếp theo"
     - "NẾU chi phí mỗi việc thành công (simulated, thay bằng phút đo thật sau tuần 1) vượt 6.000 đ TRONG 2 tuần liên tiếp THÌ PM trợ lý hoàn phí thu hẹp về noi_dia và giới hạn tối đa 2 lần chạy KHÔNG THÌ không được mở hang_nang"
-    - "NẾU tỉ lệ nhân viên bỏ qua gợi ý (sửa hoặc bỏ, hiện 27,12% = 48/177 yêu cầu được xem lại) vượt 35% TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày KHÔNG THÌ không được chuyển sang bước rollout tiếp theo"
+    - "NẾU tỉ lệ nhân viên bỏ qua gợi ý (sửa hoặc bỏ, trong phạm vi pilot hiện 21,09% = 27/128 yêu cầu được xem lại) vượt 28% TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày KHÔNG THÌ không được chuyển sang bước rollout tiếp theo"
   interim_looks: "chỉ kiểm tra chỉ số an toàn"
   rollback: "Giám đốc vận hành bấm cờ tắt, hiệu lực trong 15 phút; khách tiếp tục được phục vụ bằng luồng nhân viên tự làm như trước pilot"  # ai bấm, mất bao lâu, khách được phục vụ bằng gì
   decision_date: "2027-01-15"

@@ -4,9 +4,7 @@
 
 ## Hai bộ nhãn độc lập
 
-Người gắn nhãn 1: B (@trinhtuanphong123) · Người gắn nhãn 2: C (@qockhah253) (gắn trong 8 phút, không trao đổi)
-
-Cách điền: mỗi người chỉ điền cột của mình, dùng đúng tên 5 loại ở trên. Đủ 20 ca thì chạy `cd src && python lab13.py` để in tỉ lệ đồng thuận và các ca lệch (hàm `so_nhan`), rồi mới điền cột "Trùng?" và "Nhãn thống nhất".
+Người gắn nhãn 1: ... · Người gắn nhãn 2: ... (gắn trong 8 phút, không trao đổi)
 
 | Ca | Nhãn người 1 | Nhãn người 2 | Trùng? | Nhãn thống nhất |
 | --: | --- | --- | --- | --- |

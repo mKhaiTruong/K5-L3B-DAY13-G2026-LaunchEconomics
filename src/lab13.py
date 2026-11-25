@@ -143,8 +143,15 @@ def so_nhan(duong_dan='../report/team/bang_loi.md'):
     """
     hop_le = {loai.lower() for loai in LOAI_LOI}
     trung, lech, sai_ten, so_ca = 0, [], [], 0
+    trong_muc = False
     with open(duong_dan, encoding='utf-8') as f:
         for dong in f:
+            if dong.startswith('## '):
+                # Chỉ đọc mục "Hai bộ nhãn độc lập"; bảng khắc phục phía sau cũng có cột số ca.
+                trong_muc = 'Hai bộ nhãn' in dong
+                continue
+            if not trong_muc:
+                continue
             o = [x.strip() for x in dong.strip().strip('|').split('|')]
             if len(o) != 5 or not o[0].isdigit():
                 continue   # chỉ lấy dòng của bảng "Hai bộ nhãn độc lập"

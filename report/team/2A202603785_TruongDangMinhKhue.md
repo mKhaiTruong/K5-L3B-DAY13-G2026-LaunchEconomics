@@ -34,7 +34,7 @@
 | CP3 · `so_nhan()` (và sửa lỗi đọc nhầm bảng khắc phục) | #8 | `3b6dc2b`, `4feda27` |
 | CP5 · E1 + event | #11 | `686e569` |
 | Phân vai, cập nhật tiến độ, nháp D2 | issue #1 | comment tiến độ CP1 → CP4 |
-| Review, kiểm số độc lập | #4, #5, #6, #7, #9, #10 | comment review trên từng PR |
+| Review, kiểm số độc lập | #4, #5, #6, #7, #9, #10, #13, #14, #15 | comment review trên từng PR |
 
 Chạy lại: `cd src && python lab13.py` in "Ba phép thử đáp án biết trước: ĐẠT" và đủ các bảng A → E1.
 
@@ -53,8 +53,6 @@ Chạy lại: `cd src && python lab13.py` in "Ba phép thử đáp án biết tr
   - trước mỗi lần merge: gộp thử, chạy `lab13.py`, `yaml.safe_load`, `grep` dấu `?` và từ cấm theo quy tắc 5 trong README.
 
 ## 6. Tự đánh giá
-
-*(Nháp, Khuê sửa lại theo ý mình.)*
 
 - **Làm tốt:** code chạy hết từ A đến E, số khớp đáp án; giữ được nguyên tắc tự kiểm tra trước khi tin số (đặc biệt kiểm số D1 độc lập); review kỹ để hồ sơ không chép số hay câu chữ từ bài mẫu.
 - **Chưa tốt:** dựa nhiều vào AI cho phần code nên cần tự giải thích lại được cỡ mẫu hiệu dụng và hệ số thiết kế; hai lần kết luận PR sớm khi chưa fetch bản mới nhất của bạn trong nhóm.

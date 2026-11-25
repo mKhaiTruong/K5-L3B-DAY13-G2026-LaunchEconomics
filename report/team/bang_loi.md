@@ -31,6 +31,8 @@ Người gắn nhãn 1: Phong · Người gắn nhãn 2: Khánh (gắn độc l�
 
 **Tỉ lệ đồng thuận:** 18 / 20 = 90% (đạt ngưỡng 16/20 = 80%)
 
+Ghi chú: người gắn nhãn 2 đã trao đổi với AI về ca 7, 17, 20 trước khi gắn xong. Bỏ 3 ca này, đồng thuận là 16/17 = 94% (chỉ lệch ca 11).
+
 ## Quy tắc phân biệt cho các ca không trùng và ca dễ lẫn
 
 Hai ca không trùng là 11 và 20; các ca còn lại là quy tắc cho các ca dễ lẫn.

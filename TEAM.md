@@ -2,21 +2,20 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm:
-- Lớp: L3A hoặc L3B
-- Repo nhóm: `K5-L3A-DAY13-TenNhom-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt:
+- Tên nhóm: G2026
+- Lớp: L3B
+- Repo nhóm: `K5-L3B-DAY13-G2026-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
+- URL repo, nhánh nộp, commit chốt: https://github.com/mKhaiTruong/K5-L3B-DAY13-G2026-LaunchEconomics · nhánh `main` · commit chốt: (điền khi nộp)
 
 ## Thành viên
 
-| STT | Họ tên | MSSV | Email | GitHub | Vai trò |
-| --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
-|   2 |        |      |       |        |         |
-|   3 |        |      |       |        |         |
-|   4 |        |      |       |        |         |
+| STT | Họ tên                | MSSV        | Email                       | GitHub            | Vai trò                             |
+| --: | --------------------- | ----------- | --------------------------- | ----------------- | ----------------------------------- |
+|   1 | Trương Đặng Minh Khuê | 2A202603785 | 26ai.khuetdm@vinuni.edu.vn  | mKhaiTruong       | A · Người viết code (trước giải lao), kiểm số ở CP4; tạo repo nhóm |
+|   2 | Triệu Quốc Khánh      | 2A202603749 | 26ai.khanhtq4@vinuni.edu.vn | qockhah253        | C · Người gắn nhãn 2 kiêm giữ hồ sơ |
+|   3 | Trịnh Tuấn Phong      | 2A202603781 | 26ai.phongtt2@vinuni.edu.vn | trinhtuanphong123 | B · Người gắn nhãn 1 kiêm người kiểm số; viết code sau giải lao |
 
-Bốn vai của lab:
+Nhóm chỉ có 3 người nên một người kiêm hai vai (phân vai theo issue #1 của nhóm trưởng). Bốn vai của lab:
 
 - **Người viết code:** viết và chạy `src/lab13.py`.
 - **Người kiểm số:** tính tay một con số để đối chiếu, điền bảng.
